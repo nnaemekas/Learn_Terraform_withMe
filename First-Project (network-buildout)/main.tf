@@ -1,18 +1,6 @@
-terraform {
-  backend "s3" {
-    bucket = "terraform-states"
-    key    = "vpc-terraform.tfstate"
-    region = "us-east-1"
-  }
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-    }
-  }
-}
-
 provider "aws" {
-  region = "us-east-1"
+  region = "us-east-2"
+  profile = "myaws"
 }
 
 resource "aws_vpc" "terraformhardway-platform" {
@@ -122,7 +110,4 @@ output "vpc_security_group_id" {
 }
 output "vpcid" {
   value = aws_vpc.terraformhardway-platform.id
-}
-output "security-group-id" {
-  value = aws_security_group.allow_incoming.id
 }
